@@ -7,6 +7,30 @@
 
 var GREETING = 'Click button to roll down the pricing of the Master Pricing to the Study Specific Pricing records';
 
+function getInternalidCopy(invoiceName) {
+
+	var Searchresults;
+
+	var Columns = new Array();
+
+
+	var Filters = new Array();
+	Filters[0] = new nlobjSearchFilter('tranid', null, 'startswith', invoiceName);
+
+	Columns[0] = new nlobjSearchColumn('internalid');
+
+	Searchresults = nlapiSearchRecord('invoice', null, Filters, Columns);
+
+	if (Searchresults != null) {
+		return Searchresults[0].getValue(Columns[0]);
+	} else {
+		return 0;
+	}
+
+
+
+}
+
 /**
  * Starting Point Function
  */
